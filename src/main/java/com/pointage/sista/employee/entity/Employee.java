@@ -1,4 +1,4 @@
-package com.pointage.sista.entity;
+package com.pointage.sista.employee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

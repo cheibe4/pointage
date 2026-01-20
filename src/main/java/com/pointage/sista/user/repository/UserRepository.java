@@ -1,6 +1,6 @@
-package com.pointage.sista.repository;
+package com.pointage.sista.user.repository;
 
-import com.pointage.sista.entity.User;
+import com.pointage.sista.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
