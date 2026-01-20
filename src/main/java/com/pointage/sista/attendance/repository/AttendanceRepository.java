@@ -1,4 +1,4 @@
-package com.pointage.sista.attendance.entity.repository;
+package com.pointage.sista.attendance.repository;
 
 import com.pointage.sista.attendance.entity.Attendance;
 import com.pointage.sista.employee.entity.Employee;
