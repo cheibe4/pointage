@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -39,7 +40,7 @@ public class AttendanceServiceImpl implements AttendanceService{
         Attendance attendance = Attendance.builder()
                 .employee(employee)
                 .workDate(today)
-                .checkInTime(LocalDateTime.now())
+                .checkInTime(LocalTime.now())
                 .build();
 
         return attendanceRepository.save(attendance);
@@ -61,7 +62,7 @@ public class AttendanceServiceImpl implements AttendanceService{
             throw new IllegalStateException("Employee already checked out");
         }
 
-        attendance.setCheckOutTime(LocalDateTime.now());
+        attendance.setCheckOutTime(LocalTime.now());
 
         return attendanceRepository.save(attendance);
     }

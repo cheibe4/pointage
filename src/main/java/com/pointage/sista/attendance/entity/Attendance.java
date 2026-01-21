@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,12 +18,12 @@ import java.time.LocalDateTime;
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uk_employee_day",
-                        columnNames = {"employee_id", "work_date"}
+                        columnNames = {"employee_id", "attendance_date"}
                 )
         },
         indexes = {
                 @Index(name = "idx_attendance_employee", columnList = "employee_id"),
-                @Index(name = "idx_attendance_work_date", columnList = "work_date")
+                @Index(name = "idx_attendance_attendance_date", columnList = "attendance_date")
         }
 )
 public class Attendance {
@@ -45,19 +45,19 @@ public class Attendance {
     /**
      * Logical working day (important for reporting)
      */
-    @Column(name = "work_date", nullable = false)
+    @Column(name = "attendance_date", nullable = false)
     private LocalDate workDate;
 
     /**
      * Arrival time (check-in)
      */
     @Column(name = "check_in_time", nullable = false)
-    private LocalDateTime checkInTime;
+    private LocalTime checkInTime;
 
     /**
      * Departure time (check-out)
      * Nullable until the employee leaves
      */
     @Column(name = "check_out_time")
-    private LocalDateTime checkOutTime;
+    private LocalTime checkOutTime;
 }
