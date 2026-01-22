@@ -20,6 +20,7 @@ public class AttendanceServiceImpl implements AttendanceService{
     private final AttendanceRepository attendanceRepository;
     private final EmployeeRepository employeeRepository;
 
+
     @Override
     public Attendance checkIn(Long employeeId) {
 
@@ -94,6 +95,5 @@ public class AttendanceServiceImpl implements AttendanceService{
                 endDate
         );
     }
-
 
 }

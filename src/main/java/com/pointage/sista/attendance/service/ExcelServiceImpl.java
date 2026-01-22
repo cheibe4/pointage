@@ -36,8 +36,7 @@ public class ExcelServiceImpl implements ExcelService{
                 Row row = sheet.createRow(rowIndex++);
 
                 row.createCell(0).setCellValue(attendance.getEmployee().getId());
-                row.createCell(1).setCellValue(attendance.getEmployee().getFirstName() + " " +
-                        attendance.getEmployee().getLastName());
+                row.createCell(1).setCellValue(attendance.getEmployee().getName());
                 row.createCell(2).setCellValue(attendance.getWorkDate().format(dateFormatter));
 
                 if(attendance.getCheckInTime() != null) {
@@ -64,4 +63,5 @@ public class ExcelServiceImpl implements ExcelService{
             throw new RuntimeException("Failed to export data to Excel file: " + e.getMessage());
         }
     }
+
 }

@@ -10,11 +10,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(
-        name = "employees",
-        indexes = {
-                @Index(name = "idx_employee_department", columnList = "department"),
-                @Index(name = "idx_employee_role", columnList = "role")
-        }
+        name = "employees"
 )
 public class Employee {
 
@@ -22,17 +18,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false, length = 100)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 100)
-    private String lastName;
-
-    @Column(nullable = false, length = 100)
-    private String role;
-
-    @Column(nullable = false, length = 100)
-    private String department;
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
     private boolean active = true;
