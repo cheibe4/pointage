@@ -2,11 +2,16 @@ package com.pointage.sista.attendance.controller;
 
 import com.pointage.sista.attendance.entity.Attendance;
 import com.pointage.sista.attendance.service.AttendanceService;
+import com.pointage.sista.attendance.service.ExcelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AttendanceController {
     private final AttendanceService attendanceService;
+    private final ExcelService excelService;
 
     /**
      * Check-in (arrival)
@@ -56,5 +62,24 @@ public class AttendanceController {
         return ResponseEntity.ok(
                 attendanceService.getAttendanceBetweenDates(employeeId, startDate, endDate)
         );
+    }
+
+    @GetMapping("/export")
+    public ResponseEntity<InputStreamResource> exportAttendanceToExcel(
+            @RequestParam Long employeeId,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ){
+        List<Attendance> attendances
+                = attendanceService.getAttendanceBetweenDates(employeeId, startDate, endDate);
+        ByteArrayInputStream stream = excelService.exportAttendance(attendances);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition","attachment; filename=attendance.xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ))
+                .body(new InputStreamResource(stream));
     }
 }
