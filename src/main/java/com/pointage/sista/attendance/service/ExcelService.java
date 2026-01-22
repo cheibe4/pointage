@@ -9,5 +9,6 @@ import java.util.List;
 public interface ExcelService {
     ByteArrayInputStream exportAttendance(List<Attendance> attendances);
 
+    ByteArrayInputStream exportDailyAttendance(LocalDate date);
 
 }

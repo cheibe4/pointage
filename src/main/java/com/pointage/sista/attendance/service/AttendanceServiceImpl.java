@@ -96,4 +96,9 @@ public class AttendanceServiceImpl implements AttendanceService{
         );
     }
 
+    @Override
+    public List<Attendance> getDailyAttendance(LocalDate date) {
+        return attendanceRepository.findAllByWorkDate(date);
+    }
+
 }

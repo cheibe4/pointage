@@ -17,4 +17,6 @@ public interface AttendanceService {
             LocalDate startDate,
             LocalDate endDate
     );
+
+    List<Attendance> getDailyAttendance(LocalDate date);
 }

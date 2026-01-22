@@ -32,6 +32,11 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
     );
 
     /**
+     * Employees attendance per day
+     */
+    List<Attendance> findAllByWorkDate(LocalDate workDate);
+
+    /**
      * Find employees currently present (checked-in but not checked-out)
      */
     List<Attendance> findAllByCheckOutTimeIsNull();
