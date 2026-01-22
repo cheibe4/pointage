@@ -82,4 +82,23 @@ public class AttendanceController {
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ))
                 .body(new InputStreamResource(stream));
     }
+
+    @GetMapping("/export/daily")
+    public ResponseEntity<InputStreamResource> exportDailyAttendance(
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    ) {
+        ByteArrayInputStream stream = excelService.exportDailyAttendance(date);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition",
+                "attachment; filename=attendance_" + date + ".xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(new InputStreamResource(stream));
+    }
+
 }

@@ -105,12 +105,12 @@ public class ExcelServiceImpl implements ExcelService{
 
                 row.createCell(0).setCellValue(attendance.getEmployee().getId());
                 row.createCell(1).setCellValue(attendance.getEmployee().getName());
-                row.createCell(4).setCellValue(
+                row.createCell(2).setCellValue(
                         attendance.getCheckInTime() != null
                                 ? attendance.getCheckInTime().format(timeFormatter)
                                 : ""
                 );
-                row.createCell(5).setCellValue(
+                row.createCell(3).setCellValue(
                         attendance.getCheckOutTime() != null
                                 ? attendance.getCheckOutTime().format(timeFormatter)
                                 : ""
