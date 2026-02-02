@@ -101,4 +101,34 @@ public class AttendanceController {
                 .body(new InputStreamResource(stream));
     }
 
+    /**
+     * Weekly attendance export (Monday → Saturday)
+     * Example:
+     *   GET /api/attendance/export/weekly?date=2026-01-15
+     */
+    @GetMapping("/weekly")
+    public ResponseEntity<byte[]> exportWeeklyAttendance(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate date
+    ) {
+
+        ByteArrayInputStream stream =
+                excelService.exportWeeklyAttendance(date);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(
+                HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=weekly_attendance_" + date + ".xlsx"
+        );
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(
+                        MediaType.parseMediaType(
+                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        )
+                )
+                .body(stream.readAllBytes());
+    }
+
 }

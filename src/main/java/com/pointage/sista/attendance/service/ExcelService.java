@@ -11,4 +11,6 @@ public interface ExcelService {
 
     ByteArrayInputStream exportDailyAttendance(LocalDate date);
 
+    ByteArrayInputStream exportWeeklyAttendance(LocalDate anyDateInWeek);
+
 }

@@ -40,4 +40,6 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
      * Find employees currently present (checked-in but not checked-out)
      */
     List<Attendance> findAllByCheckOutTimeIsNull();
+
+    List<Attendance> findAllByWorkDateBetween(LocalDate start, LocalDate end);
 }
